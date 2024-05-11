@@ -1,30 +1,28 @@
 const express = require('express');
-const AWSController = require('../../controllers/AWSController');
+const BucketController = require('../../controllers/BucketController');
+
+const ObjectController = require('../../controllers/ObjectController');
+
 const router = express.Router();
 
 
 
 
-router.get('/listBucket', AWSController.listBucket);
+router.get('/listBucket', BucketController.listBucket);
 
-router.get('/createBucket', AWSController.createBucket);
+router.post('/createBucket', BucketController.createBucket);
 
-router.get('/deleteBucket', AWSController.deleteBucket);
+router.delete('/deleteBucket', BucketController.deleteBucket);
 
-router.get('/listObjectInBucket', AWSController.listObjectInBucket);
+router.get('/listObjectInBucket', ObjectController.listObjectInBucket);
 
-router.get('/uploadObjectInBucket', AWSController.uploadObjectInBucket);
+router.post('/uploadObjectInBucket', ObjectController.uploadObjectInBucket);
 
-router.get('/getObjectFromBucket', AWSController.getObjectFromBucket);
+router.get('/getObjectFromBucket', ObjectController.getObjectFromBucket);
 
-router.get('/deleteObjectFromBucket', AWSController.deleteObjectFromBucket);
+router.delete('/deleteObjectFromBucket', ObjectController.deleteObjectFromBucket);
 
-
-
-
-
-
-
+router.post('/uploadObject',  ObjectController.uploadObjectInBucket);
 
 
 

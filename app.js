@@ -1,27 +1,17 @@
+
 const express = require('express');
-const routes = require('./route/v1');
-const cors = require('cors');
-const bodyParser = require('body-parser')
-const httpStatus = require('http-status');
-const config = require('./config');
-
-const fileupload = require('express-fileupload');
-
-
 const app = express();
+const route = require('./route/v1');
 
-app.use(cors())
-app.options('*', cors());
-
+// Middleware
 app.use(express.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(fileupload())
+app.use(express.urlencoded({ extended: true }));
 
-app.use('/v1', routes);
+app.use('/v1', route);
 
-app.use((req, res, next) => {
-    next(new ApiError(httpStatus.NOT_FOUND, 'Not found'));
+// Routes
+app.get('/', (req, res) => {
+  res.send('Hello World! This is JK-Tech');
 });
 
 module.exports = app;
