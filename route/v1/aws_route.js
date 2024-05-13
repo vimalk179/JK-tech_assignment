@@ -10,15 +10,15 @@ const router = express.Router();
 
 
 
-router.get('/listObjectInBucket', ObjectController.listObjectInBucket);
+// router.get('/listObjectInBucket', ObjectController.listObjectInBucket);
 
-router.post('/uploadObjectInBucket', ObjectController.uploadObjectInBucket);
+// router.post('/uploadObjectInBucket', ObjectController.uploadObjectInBucket);
 
-router.get('/getObjectFromBucket', ObjectController.getObjectFromBucket);
+// router.get('/getObjectFromBucket', ObjectController.getObjectFromBucket);
 
-router.delete('/deleteObjectFromBucket', ObjectController.deleteObjectFromBucket);
+// router.delete('/deleteObjectFromBucket', ObjectController.deleteObjectFromBucket);
 
-router.post('/uploadObject',  ObjectController.uploadObjectInBucket);
+// router.post('/uploadObject',  ObjectController.uploadObjectInBucket);
 
 
 

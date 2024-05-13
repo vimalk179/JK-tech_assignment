@@ -5,6 +5,18 @@ const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk');
 const path = require('path');
 var fs = require('fs');
+const mysql = require('mysql');
+
+
+const dbConfig = {
+    host: 'localhost',         // MySQL server hostname
+    user: 'admin',             // MySQL username
+    password: 'admin',         // MySQL password
+    database: 'jktech'         // MySQL database name
+  };
+  
+  // Create a MySQL connection pool
+
 
 const s3 = new AWS.S3({
     accessKeyId: S3_ACCESS_KEY,
@@ -24,72 +36,106 @@ BucketService.listBucket = async (req, res) => {
     }
 }
 
+const pool = mysql.createPool(dbConfig);
 
-BucketService.createBucket = async (bucketName) => {
+
+
+BucketService.listFromDB = async (req, res) => {
     try {
-        await s3.createBucket({ Bucket: bucketName }).promise();
+        // Execute SQL query to fetch data from the buckets table
+        const result = await executeQuery('SELECT * FROM buckets');
 
-        console.log(`Bucket '${bucketName}' created successfully`);
+        // Extract the rows from the result
+        const buckets = result;
 
-        return { status: 200, bucketName : bucketName ,message: `Bucket '${bucketName}' created successfully` };
-
+        // Return the response
+        return { status: 200, buckets: buckets, message: 'Buckets fetched successfully' };
     } catch (error) {
-        console.log("Error", error);
-        return { status: 403, message: 'Failed to create bucket' };
+        console.error("Error fetching buckets:", error);
+        return { status: 500, message: 'Something went wrong while fetching buckets' };
     }
+};
+
+// Function to execute SQL queries
+function executeQuery(sql) {
+    return new Promise((resolve, reject) => {
+        pool.query(sql, (error, results) => {
+            if (error) {
+                reject(error);
+            } else {
+                resolve(results);
+            }
+        });
+    });
 }
 
-BucketService.deleteBucket = async (bucketName) => {
-    try {
+
+
+// BucketService.createBucket = async (bucketName) => {
+//     try {
+//         await s3.createBucket({ Bucket: bucketName }).promise();
+
+//         console.log(`Bucket '${bucketName}' created successfully`);
+
+//         return { status: 200, bucketName : bucketName ,message: `Bucket '${bucketName}' created successfully` };
+
+//     } catch (error) {
+//         console.log("Error", error);
+//         return { status: 403, message: 'Failed to create bucket' };
+//     }
+// }
+
+// BucketService.deleteBucket = async (bucketName) => {
+//     try {
       
-        const headBucketParams = {
-            Bucket: bucketName
-        };
-        await s3.headBucket(headBucketParams).promise();
+//         const headBucketParams = {
+//             Bucket: bucketName
+//         };
+//         await s3.headBucket(headBucketParams).promise();
 
       
-        await s3.deleteBucket({ Bucket: bucketName }).promise();
-        console.log(`Bucket '${bucketName}' deleted successfully`);
-        return { status: 200, message: `Bucket '${bucketName}' deleted successfully` };
-    } catch (error) {
-        console.log("Error", error);
-        return { status: 403, message: 'Failed to delete bucket' };
-    }
-}
+//         await s3.deleteBucket({ Bucket: bucketName }).promise();
+//         console.log(`Bucket '${bucketName}' deleted successfully`);
+//         return { status: 200, message: `Bucket '${bucketName}' deleted successfully` };
+//     } catch (error) {
+//         console.log("Error", error);
+//         return { status: 403, message: 'Failed to delete bucket' };
+//     }
+// }
 
-BucketService.list= async (req, res) => {
-    try {
+// BucketService.list= async (req, res) => {
+//     try {
         
 
-        return { status: 200, buckets: data.Buckets, message: 'Bucket Fetched' };
-    } catch (error) {
-        console.log("Error", error);
-        return { status: 403, message: 'Something Went Wrong' };
-    }
-}
+//         return { status: 200, buckets: data.Buckets, message: 'Bucket Fetched' };
+//     } catch (error) {
+//         console.log("Error", error);
+//         return { status: 403, message: 'Something Went Wrong' };
+//     }
+// }
 
-BucketService.create= async (bucketName) => {
-    try {
+// BucketService.create= async (bucketName) => {
+//     try {
        
-        return { status: 200, bucketName : bucketName ,message: `Bucket '${bucketName}' created successfully` };
+//         return { status: 200, bucketName : bucketName ,message: `Bucket '${bucketName}' created successfully` };
 
-    } catch (error) {
-        console.log("Error", error);
-        return { status: 403, message: 'Failed to create bucket' };
-    }
-}
+//     } catch (error) {
+//         console.log("Error", error);
+//         return { status: 403, message: 'Failed to create bucket' };
+//     }
+// }
 
-BucketService.delete = async (bucketName) => {
-    try {
+// BucketService.delete = async (bucketName) => {
+//     try {
       
       
-        console.log(`Bucket '${bucketName}' deleted successfully`);
-        return { status: 200, message: `Bucket '${bucketName}' deleted successfully` };
-    } catch (error) {
-        console.log("Error", error);
-        return { status: 403, message: 'Failed to delete bucket' };
-    }
-}
+//         console.log(`Bucket '${bucketName}' deleted successfully`);
+//         return { status: 200, message: `Bucket '${bucketName}' deleted successfully` };
+//     } catch (error) {
+//         console.log("Error", error);
+//         return { status: 403, message: 'Failed to delete bucket' };
+//     }
+// }
 
 
 

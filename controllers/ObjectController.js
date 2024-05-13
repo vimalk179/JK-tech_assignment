@@ -82,78 +82,78 @@ ObjectController.listObject = async (req, res) => {
 
 
 
-ObjectController.listObjectInBucket = async (req, res) => {
-    let data =  await ObjectService.listObjectInBucket(req)
-    try {
+// ObjectController.listObjectInBucket = async (req, res) => {
+//     let data =  await ObjectService.listObjectInBucket(req)
+//     try {
 
-        let bucket =  {}
-        res.json(Object.keys(buckets));
+//         let bucket =  {}
+//         res.json(Object.keys(buckets));
     
       
 
-    }
-    catch (error) {
+//     }
+//     catch (error) {
       
-        res
-            .status(401)
-            .send('Something went wrong')
-    }
-}
-ObjectController.uploadObjectInBucket = async (req, res) => {
+//         res
+//             .status(401)
+//             .send('Something went wrong')
+//     }
+// }
+// ObjectController.uploadObjectInBucket = async (req, res) => {
 
-    let data = await ObjectService.uploadObjectInBucket(req)
+//     let data = await ObjectService.uploadObjectInBucket(req)
 
-    try{
+//     try{
 
-    res
-    .status(200)
-    .send(data)
+//     res
+//     .status(200)
+//     .send(data)
       
 
-    }
-    catch (error) {
+//     }
+//     catch (error) {
       
-        res
-            .status(401)
-            .send('Something went wrong')
-    }
-}
+//         res
+//             .status(401)
+//             .send('Something went wrong')
+//     }
+// }
 
-ObjectController.getObjectFromBucket = async (req, res) => {
-    let data = await ObjectService.getObjectFromBucket(req)
-    try {
+// ObjectController.getObjectFromBucket = async (req, res) => {
+//     let data = await ObjectService.getObjectFromBucket(req)
+//     try {
 
-        let bucket =  {}
-        res.json(Object.keys(buckets));
+//         let bucket =  {}
+//         res.json(Object.keys(buckets));
     
       
 
-    }
-    catch (error) {
+//     }
+//     catch (error) {
       
-        res
-            .status(401)
-            .send('Something went wrong')
-    }
-}
+//         res
+//             .status(401)
+//             .send('Something went wrong')
+//     }
+// }
 
-ObjectController.deleteObjectFromBucket = async (req, res) => {
-    let data = await ObjectService.deleteObjectFromBucket(req)
-    try {
+// ObjectController.deleteObjectFromBucket = async (req, res) => {
+//     let data = await ObjectService.deleteObjectFromBucket(req)
+//     try {
 
-        let bucket =  {}
-        res.json(Object.keys(buckets));
+//         let bucket =  {}
+//         res.json(Object.keys(buckets));
     
       
 
-    }
-    catch (error) {
+//     }
+//     catch (error) {
       
-        res
-            .status(401)
-            .send('Something went wrong')
-    }
-}
+//         res
+//             .status(401)
+//             .send('Something went wrong')
+//     }
+// }
 // ObjectController.uploadObjectInBucket = async (req, res) => {
 //     let data = await ObjectService.uploadObjectInBucket(req)
 //     try {

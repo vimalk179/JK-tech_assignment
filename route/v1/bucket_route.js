@@ -7,22 +7,24 @@ const router = express.Router();
 
 
 
-router.get('/listBucket', BucketController.listBucket);
+// router.get('/listBucket', BucketController.listBucket);
 
-router.post('/createBucket', BucketController.createBucket);
+// router.post('/createBucket', BucketController.createBucket);
 
-router.delete('/deleteBucket', BucketController.deleteBucket);
+// router.delete('/deleteBucket', BucketController.deleteBucket);
 
 
-router.get('/getObject', ObjectController.getObject);
+// router.get('/getObject', ObjectController.getObject);
 
- router.put('/updateObject', ObjectController.updateObject);
+//  router.put('/updateObject', ObjectController.updateObject);
 
- router.delete('/deleteObjectFromBucket', ObjectController.delete);
+//  router.delete('/deleteObjectFromBucket', ObjectController.delete);
 
-router.get('/listObject', ObjectController.listObject);
+// router.get('/listObject', ObjectController.listObject);
 
 router.get('/list', BucketController.list);
+
+router.get('/listfromDB', BucketController.listFromDB);
 
 
 
