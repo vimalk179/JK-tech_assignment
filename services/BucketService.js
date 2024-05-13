@@ -24,7 +24,7 @@ BucketService.listBucket = async (req, res) => {
         const dataPath = path.join('data');
         const buckets = fs.existsSync(dataPath) ? fs.readdirSync(dataPath) : [];
 
-        return { status: 200, buckets: dataPath, message: 'Bucket Fetched' };
+        return { status: 200, buckets: buckets, message: 'Bucket Fetched' };
     } catch (error) {
         console.log("Error", error);
         return { status: 403, message: 'Something Went Wrong' };
