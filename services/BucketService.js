@@ -5,7 +5,11 @@ const multerS3 = require('multer-s3')
 const AWS = require('aws-sdk');
 const path = require('path');
 var fs = require('fs');
-const mysql = require('mysql');
+
+const mysql = require('mysql2');
+
+// Use mysql2 instead of mysql for creating the connection pool
+
 
 
 const dbConfig = {
@@ -17,11 +21,8 @@ const dbConfig = {
   
   // Create a MySQL connection pool
 
+  const pool = mysql.createPool(dbConfig);
 
-const s3 = new AWS.S3({
-    accessKeyId: S3_ACCESS_KEY,
-    secretAccessKey: S3_SECRET_KEY,
-});
 
 const BucketService = {}
 BucketService.listBucket = async (req, res) => {
@@ -36,7 +37,7 @@ BucketService.listBucket = async (req, res) => {
     }
 }
 
-const pool = mysql.createPool(dbConfig);
+
 
 
 

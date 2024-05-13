@@ -16,6 +16,16 @@ router.get('/getObject', ObjectController.getObject);
 router.get('/listObject', ObjectController.listObject);
 
 
+//from DB
+
+// router.get('/getObjectFromDB', ObjectController.getObjectFromDB);
+
+//  router.put('/updateObjectInDB', ObjectController.updateObjectInDB);
+
+//  router.delete('/deleteObjectFromBucketDB', ObjectController.deleteObjectFromBucketDB);
+
+// router.get('/listObjectFromDB', ObjectController.listObjectFromDB);
+
 
 
 

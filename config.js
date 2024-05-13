@@ -26,8 +26,6 @@ module.exports = {
     user: envVars.USER_HOME,
   }
 }
-global.S3_ACCESS_KEY='AKIATL5QV5VFUCJEYM2H'
-global.S3_SECRET_KEY='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'
-global.S3_BUCKET_NAME = 'devjktech';
+
 
 

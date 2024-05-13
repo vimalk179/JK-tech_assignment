@@ -23,7 +23,7 @@ ObjectController.getObject = async (req, res) => {
 
         res
             .status(401)
-            .send('Something went wrong')
+            .send(data)
     }
 }
 ObjectController.updateObject = async (req, res) => {
