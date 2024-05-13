@@ -8,19 +8,13 @@ var fs = require('fs');
 
 const mysql = require('mysql2');
 
-// Use mysql2 instead of mysql for creating the connection pool
-
-
-
 const dbConfig = {
-    host: 'localhost',         // MySQL server hostname
-    user: 'admin',             // MySQL username
-    password: 'admin',         // MySQL password
-    database: 'jktech'         // MySQL database name
+    host: 'localhost',         
+    user: 'admin',             
+    password: 'admin',         
+    database: 'jktech'         
   };
   
-  // Create a MySQL connection pool
-
   const pool = mysql.createPool(dbConfig);
 
 
@@ -37,19 +31,14 @@ BucketService.listBucket = async (req, res) => {
     }
 }
 
-
-
-
-
 BucketService.listFromDB = async (req, res) => {
     try {
-        // Execute SQL query to fetch data from the buckets table
+     
         const result = await executeQuery('SELECT * FROM buckets');
 
-        // Extract the rows from the result
         const buckets = result;
 
-        // Return the response
+    
         return { status: 200, buckets: buckets, message: 'Buckets fetched successfully' };
     } catch (error) {
         console.error("Error fetching buckets:", error);
@@ -57,7 +46,7 @@ BucketService.listFromDB = async (req, res) => {
     }
 };
 
-// Function to execute SQL queries
+
 function executeQuery(sql) {
     return new Promise((resolve, reject) => {
         pool.query(sql, (error, results) => {
