@@ -9,6 +9,76 @@ const fs = require('fs');
 
 const ObjectController = {}
 
+ObjectController.getObject = async (req, res) => {
+    let data =  await ObjectService.getObject(req)
+    
+    try {
+     
+        res
+        .status(200)
+        .send(data)
+      
+    }
+    catch (error) {
+
+        res
+            .status(401)
+            .send('Something went wrong')
+    }
+}
+ObjectController.updateObject = async (req, res) => {
+    let data =  await ObjectService.updateObject(req)
+    
+    try {
+     
+        res
+        .status(200)
+        .send(data)
+      
+    }
+    catch (error) {
+
+        res
+            .status(401)
+            .send('Something went wrong')
+    }
+}
+ObjectController.delete = async (req, res) => {
+    let data =  await ObjectService.delete(req)
+    
+    try {
+     
+        res
+        .status(200)
+        .send(data)
+      
+    }
+    catch (error) {
+
+        res
+            .status(401)
+            .send('Something went wrong')
+    }
+}
+ObjectController.listObject = async (req, res) => {
+    let data =  await ObjectService.listObject(req)
+    
+    try {
+     
+        res
+        .status(200)
+        .send(data)
+      
+    }
+    catch (error) {
+
+        res
+            .status(401)
+            .send('Something went wrong')
+    }
+}
+
+
 
 
 
@@ -31,27 +101,13 @@ ObjectController.listObjectInBucket = async (req, res) => {
 }
 ObjectController.uploadObjectInBucket = async (req, res) => {
 
+    let data = await ObjectService.uploadObjectInBucket(req)
+
     try{
-        console.log('TESTING ')
-
-    // const files = req.files;
-
-    // const media = files.map((val , i) => {
-    //     return {
-    //         type : val.mimetype =="video/mp4" ? "video" : "image",
-    //         url : BASE_URL + val.filename
-    //     }
-    // })
-    // req.body.media = media;
-    // console.log(req.body);
-    
-    // let data = await ObjectService.uploadObjectInBucket(req.body);
-    // res.status(200).send({data : data, status : true})
-
 
     res
     .status(200)
-    .send('Its working')
+    .send(data)
       
 
     }

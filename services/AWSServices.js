@@ -5,7 +5,7 @@ const AWSServices = {}
 AWSServices.listBucket = async (req, res) => {
     try {
 
-        mappingData = await DataBaseCommonService.getData('as_name_mapping', {});
+       
         return { 'meesage': 'Successfully Saved', mappingData: mappingData };
 
     }
@@ -16,7 +16,7 @@ AWSServices.listBucket = async (req, res) => {
 AWSServices.createBucket = async (req, res) => {
     try {
 
-        mappingData = await DataBaseCommonService.getData('as_name_mapping', {});
+      
         return { 'meesage': 'Successfully Saved', mappingData: mappingData };
 
     }
@@ -28,7 +28,7 @@ AWSServices.createBucket = async (req, res) => {
 AWSServices.deleteBucket = async (req, res) => {
     try {
 
-        mappingData = await DataBaseCommonService.getData('as_name_mapping', {});
+      
         return { 'meesage': 'Successfully Saved', mappingData: mappingData };
 
     }
@@ -39,7 +39,7 @@ AWSServices.deleteBucket = async (req, res) => {
 AWSServices.listObjectInBucket = async (req, res) => {
     try {
 
-        mappingData = await DataBaseCommonService.getData('as_name_mapping', {});
+      
         return { 'meesage': 'Successfully Saved', mappingData: mappingData };
 
     }

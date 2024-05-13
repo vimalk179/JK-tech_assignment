@@ -2,7 +2,7 @@ const dotenv = require("dotenv");
 const path = require("path");
 const Joi = require("joi");
 
-dotenv.config({ path: path.join(__dirname, "../.env") });
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 
 const envVarsSchema = Joi.object()
@@ -26,4 +26,8 @@ module.exports = {
     user: envVars.USER_HOME,
   }
 }
+global.S3_ACCESS_KEY='AKIATL5QV5VFUCJEYM2H'
+global.S3_SECRET_KEY='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'
+global.S3_BUCKET_NAME = 'devjktech';
+
 

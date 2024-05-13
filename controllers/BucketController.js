@@ -14,18 +14,13 @@ BucketController.listBucket = async (req, res) => {
 
     let data = await BucketService.listBucket(req);
 
-    res
-    .status(200)
-    .send('its working')
+   
     try {
-        // s3.listBuckets(function (err, bucket) {
-        //     if (err) {
-        //         console.log("Error", err);
-        //     } else {
-        //         res.json(Object.keys(bucket));
-        //     }
-        // });
-
+      if(data.status == 200){
+        res
+        .status(200)
+        .send(data)
+      }
     }
     catch (error) {
 
@@ -35,40 +30,104 @@ BucketController.listBucket = async (req, res) => {
     }
 }
 BucketController.createBucket = async (req, res) => {
-    let data = await BucketService.createBucket(req)
+    let bucketName = req.body.bucketName;
+    let data = await BucketService.createBucket(bucketName)
+   
     try {
-
-        let bucket = {}
-        res.json(Object.keys(buckets));
-
-
+        if(data.status == 200){
+          res
+          .status(200)
+          .send(data)
+        }
+      }
+      catch (error) {
+  
+          res
+              .status(401)
+              .send('Something went wrong')
+      }
+      
 
     }
-    catch (error) {
-
-        res
-            .status(401)
-            .send('Something went wrong')
-    }
-}
+   
 
 BucketController.deleteBucket = async (req, res) => {
 
-    let data = await BucketService.deleteBucket
+    let bucketName = req.body.bucketName;
+
+    let data = await BucketService.deleteBucket(bucketName)
+   
     try {
+     
+          res
+          .status(200)
+          .send(data)
+        
+      }
+      catch (error) {
+  
+          res
+              .status(401)
+              .send('Something went wrong')
+      }
+}
 
-        let bucket = {}
-        res.json(Object.keys(buckets));
+BucketController.list = async (req, res) => {
 
+  let data = await BucketService.listBucket(req);
 
-
+ 
+  try {
+    if(data.status == 200){
+      res
+      .status(200)
+      .send(data)
     }
-    catch (error) {
+  }
+  catch (error) {
 
-        res
-            .status(401)
-            .send('Something went wrong')
+      res
+          .status(401)
+          .send('Something went wrong')
+  }
+}
+BucketController.create = async (req, res) => {
+
+  let data = await BucketService.listBucket(req);
+
+ 
+  try {
+    if(data.status == 200){
+      res
+      .status(200)
+      .send(data)
     }
+  }
+  catch (error) {
+
+      res
+          .status(401)
+          .send('Something went wrong')
+  }
+}
+BucketController.delete = async (req, res) => {
+
+  let data = await BucketService.listBucket(req);
+
+ 
+  try {
+    if(data.status == 200){
+      res
+      .status(200)
+      .send(data)
+    }
+  }
+  catch (error) {
+
+      res
+          .status(401)
+          .send('Something went wrong')
+  }
 }
 
 module.exports = BucketController;
