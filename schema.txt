@@ -1,0 +1,13 @@
+CREATE TABLE buckets (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  user_id INT NOT NULL
+);
+
+CREATE TABLE files (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(255) NOT NULL,
+  url VARCHAR(255) NOT NULL,
+  bucket_id INT NOT NULL,
+  FOREIGN KEY (bucket_id) REFERENCES buckets(id)
+);

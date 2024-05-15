@@ -1,159 +1,31 @@
-const { request } = require('express');
-
-const config = require('../config');
-var AWS = require("aws-sdk");
-const BucketService = require('../services/BucketService');
-
-AWS.config.update({ region: "REGION" });
+const Bucket = require('../models/BucketModel');
 const fs = require('fs');
+const path = require('path');
 
-const BucketController = {}
-s3 = new AWS.S3({ apiVersion: "2006-03-01" });
+exports.createBucket = (req, res) => {
+  const { name, userId } = req.body;
 
-// BucketController.listBucket = async (req, res) => {
+  const bucketData = {
+    name,
+    user_id: userId
+  };
 
-//     let data = await BucketService.listBucket(req);
-
-   
-//     try {
-//       if(data.status == 200){
-//         res
-//         .status(200)
-//         .send(data)
-//       }
-//     }
-//     catch (error) {
-
-//         res
-//             .status(401)
-//             .send('Something went wrong')
-//     }
-// }
-// BucketController.createBucket = async (req, res) => {
-//     let bucketName = req.body.bucketName;
-//     let data = await BucketService.createBucket(bucketName)
-   
-//     try {
-//         if(data.status == 200){
-//           res
-//           .status(200)
-//           .send(data)
-//         }
-//       }
-//       catch (error) {
-  
-//           res
-//               .status(401)
-//               .send('Something went wrong')
-//       }
-      
-
-//     }
-   
-
-// BucketController.deleteBucket = async (req, res) => {
-
-//     let bucketName = req.body.bucketName;
-
-//     let data = await BucketService.deleteBucket(bucketName)
-   
-//     try {
-     
-//           res
-//           .status(200)
-//           .send(data)
-        
-//       }
-//       catch (error) {
-  
-//           res
-//               .status(401)
-//               .send('Something went wrong')
-//       }
-// }
-
-BucketController.list = async (req, res) => {
-
-  let data = await BucketService.listBucket(req);
-
- 
-  try {
-    if(data.status == 200){
-      res
-      .status(200)
-      .send(data)
+  Bucket.create(bucketData, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
     }
-  }
-  catch (error) {
+    const bucketId = result.insertId;
+    const bucketDir = path.join(__dirname, '../../uploads', bucketId.toString());
+    fs.mkdirSync(bucketDir, { recursive: true });
+    res.status(201).send({ message: 'Bucket created successfully', bucketId });
+  });
+};
 
-      res
-          .status(401)
-          .send('Something went wrong')
-  }
-}
-BucketController.listFromDB = async (req, res) => {
-
-  let data = await BucketService.listFromDB(req);
-
- 
-  try {
-    if(data.status == 200){
-      res
-      .status(200)
-      .send(data)
+exports.listBuckets = (req, res) => {
+  Bucket.listAll((err, results) => {
+    if (err) {
+      return res.status(500).send(err);
     }
-    else{
-      if(data.status == 200){
-        res
-        .status(403)
-        .send(data)
-      }
-    }
-  }
-  catch (error) {
-
-      res
-          .status(401)
-          .send('Something went wrong')
-  }
-}
-// BucketController.create = async (req, res) => {
-
-//   let data = await BucketService.listBucket(req);
-
- 
-//   try {
-//     if(data.status == 200){
-//       res
-//       .status(200)
-//       .send(data)
-//     }
-//   }
-//   catch (error) {
-
-//       res
-//           .status(401)
-//           .send('Something went wrong')
-//   }
-// }
-// BucketController.delete = async (req, res) => {
-
-//   let data = await BucketService.listBucket(req);
-
- 
-//   try {
-//     if(data.status == 200){
-//       res
-//       .status(200)
-//       .send(data)
-//     }
-//   }
-//   catch (error) {
-
-//       res
-//           .status(401)
-//           .send('Something went wrong')
-//   }
-// }
-
-module.exports = BucketController;
+    res.status(200).send(results);
+  });
+};

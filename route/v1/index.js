@@ -1,20 +1,21 @@
 const express = require('express');
 
-const bucket_route = require('./bucket_route')
-const object_route = require('./object_route')
+
+const bucketRoute = require('./bucketRoute')
+const fileRoute = require('./fileRoute')
 // const routes = require('./routes')
 
 const router = express.Router();
 const defaultRoutes = [
  
     {
-        path: '/object',
-        route: object_route,
+        path: '/bucketRoute',
+        route: bucketRoute,
     },
 
     {
-        path: '/bucket',
-        route: bucket_route,
+        path: '/fileRoute',
+        route: fileRoute,
     },
 ];
 defaultRoutes.forEach((route) => {

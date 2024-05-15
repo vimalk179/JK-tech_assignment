@@ -1,0 +1,258 @@
+import React, { useState,useEffect } from "react";
+import {
+  Grid,
+  CircularProgress,
+  Typography,
+  Button,
+  Tabs,
+  Tab,
+  TextField,
+  Fade,
+} from "@material-ui/core";
+import { withRouter } from "react-router-dom";
+import classnames from "classnames";
+import { styled } from '@mui/material/styles';
+import { purple } from '@mui/material/colors';
+import { AppContext } from '../../context/LoginContext';
+import { useContext } from "react";
+import { useHistory } from 'react-router-dom';
+
+
+
+// logo
+import logo from "./logo.png";
+
+// styles
+import useStyles from "./styles";
+
+import userManager from '../../oidcConfig';
+import google from "../../images/google.svg";
+import axios from 'axios'
+import { useAuth } from '../../context/samlContext';
+
+
+// context
+import { useUserDispatch, loginUser } from "../../context/UserContext";
+import { MyContext } from '../../context/samlContext';
+
+
+
+const ColorButton = styled(Button)(({ theme }) => ({
+  fontFamily: "monospace",
+  backgroundColor: "#3a5f8c",
+  '&:hover': {
+    backgroundColor: "#3a5f8c80",
+  },
+  "&:disabled": {
+    color: "#fff",
+    backgroundColor: "#3a5f8c80"
+  },
+  disabled: {
+    backgroundColor: purple[700],
+    fontFamily: "monospace"  
+  },
+}));
+
+
+function Login(props) {
+  useEffect(()=>{
+    localStorage.removeItem('saml')
+  },[])
+  const { state, dispatch } = useContext(MyContext);
+  var classes = useStyles();
+  const history = useHistory();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AppContext);
+  // global
+  var userDispatch = useUserDispatch();
+  // const { samlAssertion,setSamlAssertion } = useAuth();
+
+
+  // local
+  var [isLoading, setIsLoading] = useState(false);
+  
+  var [error, setError] = useState(null);
+  var [activeTabId, setActiveTabId] = useState(0);
+  var [nameValue, setNameValue] = useState("");
+  var [loginValue, setLoginValue] = useState("");
+  var [licenseerror, setlicenseError] = useState(null);
+  var [passwordValue, setPasswordValue] = useState("");
+  const [isLogged, setisLogged] = useState(false);
+
+  const loggin = (event) => {
+    if (event.key === "Enter") {
+      loginUser(
+        userDispatch,
+        loginValue,
+        passwordValue,
+        props.history,
+        setIsLoading,
+        setError,
+      );
+    }
+  };
+
+  const handleLogin = async() => {
+   
+
+    // userManager.signinRedirect();
+    try {
+      const response = await axios.get(`${process.env.REACT_APP_NODEJS_API_URL}/v1/users/samllogin`, {
+
+      });
+
+if(response){
+ 
+  localStorage.setItem('saml',true)
+  // window.open(response.data)
+   window.location.href = `${response.data}`
+  
+}
+
+     
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+
+
+  return (
+    <div className={classes.maincontainer}>
+    <Grid container className={classes.container}>
+      <div className={classes.logotypeContainer}>
+        <div className={classes.formContainer}>
+          <div className={classes.form}> 
+            <Typography className={classes.text}>
+              Welcome to CMC Dashboard
+            </Typography>
+
+            <Typography className={classes.downtext}>
+              Build Together | Build Smarter
+            </Typography>
+            {activeTabId === 0 && (
+              <React.Fragment>
+                <Fade in={error}>
+                  <Typography
+                    color="secondary"
+                    className={classes.errorMessage}
+                  >
+                    Something is wrong with your login or password :(
+                  </Typography>
+                </Fade>
+                <Fade in={licenseerror}>
+                  <Typography
+                    color="secondary"
+                    className={classes.errorMessage}
+                  >
+                    Your License Has Expired :(
+                  </Typography>
+                </Fade>
+
+                <Typography className={classes.loginLables}>
+                  Username
+                </Typography>
+
+                <TextField
+                  className={classes.inputFileds}
+                  id="email"
+                  InputProps={{
+                    classes: {
+                      underline: classes.textFieldUnderline,
+                      input: classes.textField,
+                    },
+                  }}
+                  value={loginValue}
+                  onChange={(e) => setLoginValue(e.target.value)}
+                  margin="normal"
+                  placeholder="Username"
+                  type="email"
+                  fullWidth
+                  onKeyPress={loggin}
+                />
+                <Typography className={classes.loginLables}>
+                  Password
+                </Typography>
+                <TextField
+                  autoFocus
+                  id="password"
+                  InputProps={{
+                    classes: {
+                      underline: classes.textFieldUnderline,
+                      input: classes.textField,
+                    },
+                  }}
+                  value={passwordValue}
+                  onChange={(e) => setPasswordValue(e.target.value)}
+                  margin="normal"
+                  placeholder="Password"
+                  type="password"
+                  fullWidth
+
+                />
+                <div className={classes.formButtons}>
+                  {isLoading ? (
+                    <CircularProgress
+                      size={26}
+                      className={classes.loginLoader}
+                    />
+                  ) : (
+                    <ColorButton
+                      fullWidth
+                      disabled={
+                        loginValue.length === 0 || passwordValue.length === 0
+                      }
+                      onClick={() =>
+                        loginUser(
+                          userDispatch,
+                          loginValue,
+                          passwordValue,
+                          props.history,
+                          setIsLoading,
+                          setError,
+                          setlicenseError
+                        )
+                      }
+                      variant="contained"
+                    // classeName={{ disabled: classes.disabledButton }}
+                    // style={{ color: "red" }}
+                    >
+                      Log in
+                    </ColorButton>
+                  )}
+                </div>
+
+                <p style={{textAlign:'center',color:'#fff'}}>OR</p>
+                <div className={classes.formButtons}>
+                  {isLoading ? (
+                    <CircularProgress
+                      size={26}
+                      className={classes.loginLoader}
+                    />
+                  ) : (
+                    <ColorButton
+                      fullWidth
+                      variant="contained"
+                    onClick={handleLogin}
+                    >
+                      Login with SSO
+                    </ColorButton>
+                  )}
+                </div>
+                <Button
+                  // color="white"
+                  size="small"
+                  className={classes.forgetButton}
+                  style={{ color: "#fff", fontSize: "10px" }}
+                >
+                  Forget password?
+                </Button>
+
+              </React.Fragment>
+            )}
+          </div>
+        </div>
+      </div>
+    </Grid>
+    </div>
+  );
+}
