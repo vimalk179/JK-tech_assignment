@@ -19,6 +19,11 @@ const File = {
     const query = 'SELECT * FROM files WHERE bucket_id = ?';
     db.query(query, [bucketId], callback);
   }
+  ,
+  deleteByName: (fileName, callback) => {
+    const query = 'DELETE FROM files WHERE name = ?';
+    db.query(query, [fileName], callback);
+  }
 };
 
 module.exports = File;

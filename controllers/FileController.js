@@ -64,6 +64,8 @@ exports.uploadFile = (req, res) => {
       });
     });
   };
+
+
   exports.listFilesByBucketId = (req, res) => {
     const { bucketId } = req.params;
   
@@ -112,4 +114,14 @@ exports.uploadFile = (req, res) => {
         });
       });
     });
-  };
+
+    File.deleteByName(identifier, (err, results) => {
+      if (err) {
+        return res.status(500).send(err);
+      }
+      if (results && results.length === 0) {
+        return res.status(200).send({ message: 'file deleted' });
+      }
+    
+  });
+}

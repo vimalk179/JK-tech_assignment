@@ -18,6 +18,8 @@ const router = express.Router();
  *             properties:
  *               name:
  *                 type: string
+ *                 userId :
+ *                  type: Integer
  *                 description: Name of the bucket to be created.
  *     responses:
  *       200:

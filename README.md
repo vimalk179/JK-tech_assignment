@@ -1,10 +1,13 @@
 # JK-tech_assignment
-# This assignment written in node 
+# This assignment written in Nodejs/Javascript
+
 # Database mysql
+
 #  git clone https://github.com/vimalk179/JK-tech_assignment.git
 # npm install or yarn install
+
 # create mysql data base jktech with user : admin and password : admin
-# two schema needed for the same 
+# two schema/table needed for the same 
 
 # CREATE TABLE buckets (
 #   id INT AUTO_INCREMENT PRIMARY KEY,
@@ -21,4 +24,6 @@
 # );
 
 # To start the application : npm run dev
+
+# Swagger UI GUI : http://localhost:8080/api-docs/
 

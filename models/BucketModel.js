@@ -8,6 +8,10 @@ const Bucket = {
   listAll: (callback) => {
     const query = 'SELECT * FROM buckets';
     db.query(query, callback);
+  },
+  getObject: (bucketName, callback) => {
+    const query = 'SELECT * FROM buckets WHERE name = ?';
+    db.query(query, [bucketName], callback);
   }
 };
 
