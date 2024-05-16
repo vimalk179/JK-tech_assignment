@@ -25,5 +25,4 @@
 
 # To start the application : npm run dev
 
-# Swagger UI GUI : http://localhost:8080/api-docs/
 
