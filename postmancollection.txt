@@ -1,0 +1,279 @@
+
+
+{
+"collection": {
+"info": {
+"_postman_id": "d628fc24-d289-400a-ab27-6c4ba349abc3",
+"name": "JK-TECH_NEW",
+"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+"updatedAt": "2024-05-16T06:24:49.000Z",
+"uid": "761651-d628fc24-d289-400a-ab27-6c4ba349abc3",
+"createdAt": null,
+"lastUpdatedBy": null
+},
+"item": [
+{
+"name": "CREATE BUCKET",
+"id": "5664cb67-d0ac-412b-92f4-25f3ac78013d",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "raw",
+"raw": "{\n    \"name\" : \"mybucket31212\",\n    \"userId\" : 2\n}",
+"options": {
+"raw": {
+"language": "json"
+}
+}
+},
+"url": {
+"raw": "localhost:8080/v1/bucketRoute/bucket",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"bucketRoute",
+"bucket"
+]
+}
+},
+"response": [],
+"uid": "761651-5664cb67-d0ac-412b-92f4-25f3ac78013d"
+},
+{
+"name": "GET OBJECT",
+"id": "c76b2d92-3cd3-4569-b166-369687c7cea4",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "GET",
+"header": [],
+"body": {
+"mode": "formdata",
+"formdata": [
+{
+"key": "file",
+"type": "file",
+"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+"filesNotInWorkingDirectory": [
+"/home/techbridge/login.js.txt",
+"/home/techbridge/Documents/index.js"
+],
+"value": null
+},
+{
+"key": "bucketId",
+"value": "1",
+"type": "text",
+"disabled": true
+}
+]
+},
+"url": {
+"raw": "localhost:8080/v1/fileRoute/file/:identifier",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"fileRoute",
+"file",
+":identifier"
+],
+"variable": [
+{
+"key": "identifier",
+"value": "download.pdf"
+}
+]
+}
+},
+"response": [],
+"uid": "761651-c76b2d92-3cd3-4569-b166-369687c7cea4"
+},
+{
+"name": "LIST OBJECTS OF THE BUCKET",
+"id": "9fbb01b5-13ab-4d14-9458-09fbc923ad29",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "GET",
+"header": [],
+"body": {
+"mode": "formdata",
+"formdata": [
+{
+"key": "file",
+"type": "file",
+"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+"filesNotInWorkingDirectory": [
+"/home/techbridge/login.js.txt",
+"/home/techbridge/Documents/index.js"
+],
+"value": null
+},
+{
+"key": "bucketId",
+"value": "1",
+"type": "text",
+"disabled": true
+}
+]
+},
+"url": {
+"raw": "localhost:8080/v1/fileRoute/files/:bucketId",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"fileRoute",
+"files",
+":bucketId"
+],
+"variable": [
+{
+"key": "bucketId",
+"value": "1"
+}
+]
+}
+},
+"response": [],
+"uid": "761651-9fbb01b5-13ab-4d14-9458-09fbc923ad29"
+},
+{
+"name": "CREATE/UPLOAD OBJECT",
+"id": "db7559b8-685d-456d-9545-62fff656af56",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "POST",
+"header": [],
+"body": {
+"mode": "formdata",
+"formdata": [
+{
+"key": "file",
+"type": "file",
+"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+"filesNotInWorkingDirectory": [
+"/home/techbridge/Downloads/download.pdf"
+],
+"src": "/home/techbridge/Downloads/download.pdf"
+},
+{
+"key": "bucketId",
+"value": "2",
+"type": "text"
+}
+]
+},
+"url": {
+"raw": "localhost:8080/v1/fileRoute/upload?bucketId=1",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"fileRoute",
+"upload"
+],
+"query": [
+{
+"key": "bucketId",
+"value": "1"
+}
+]
+}
+},
+"response": [],
+"uid": "761651-db7559b8-685d-456d-9545-62fff656af56"
+},
+{
+"name": "DELETE OBJECT",
+"id": "79fe5c0d-7f51-4152-882e-2942fae62deb",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "DELETE",
+"header": [],
+"body": {
+"mode": "formdata",
+"formdata": [
+{
+"key": "file",
+"type": "file",
+"fileNotInWorkingDirectoryWarning": "This file isn't in your working directory. Teammates you share this request with won't be able to use this file. To make collaboration easier you can setup your working directory in Settings.",
+"filesNotInWorkingDirectory": [
+"/home/techbridge/login.js.txt",
+"/home/techbridge/Documents/index.js"
+],
+"value": null
+},
+{
+"key": "bucketId",
+"value": "1",
+"type": "text",
+"disabled": true
+}
+]
+},
+"url": {
+"raw": "localhost:8080/v1/fileRoute/file/download.pdf",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"fileRoute",
+"file",
+"download.pdf"
+]
+}
+},
+"response": [],
+"uid": "761651-79fe5c0d-7f51-4152-882e-2942fae62deb"
+},
+{
+"name": "LIST BUCKETS",
+"id": "fb818875-e4f6-4d7a-a6a6-d9a236971718",
+"protocolProfileBehavior": {
+"disableBodyPruning": true
+},
+"request": {
+"method": "GET",
+"header": [],
+"url": {
+"raw": "localhost:8080/v1/bucketRoute/buckets",
+"host": [
+"localhost"
+],
+"port": "8080",
+"path": [
+"v1",
+"bucketRoute",
+"buckets"
+]
+}
+},
+"response": [],
+"uid": "761651-fb818875-e4f6-4d7a-a6a6-d9a236971718"
+}
+]
+}
+}
